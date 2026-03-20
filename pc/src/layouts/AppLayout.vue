@@ -37,6 +37,7 @@ const menuOptions = computed<MenuOption[]>(() => {
   if (auth.isAdmin) {
     return [
       { label: '数据总览', key: '/dashboard' },
+      { label: '参数配置', key: '/system-params' },
       { label: '后台用户管理', key: '/users/backend' },
       { label: '前台用户管理', key: '/users/frontend' },
       { label: '商品管理', key: '/products' },
@@ -57,6 +58,8 @@ const pageTitle = computed(() => {
   switch (route.path) {
     case '/dashboard':
       return '数据总览'
+    case '/system-params':
+      return '参数配置'
     case '/users/backend':
       return '后台用户管理'
     case '/users/frontend':

@@ -149,3 +149,17 @@ export interface Payment {
   status: string
   payTime?: string
 }
+
+export interface SystemParamConfig {
+  id: number
+  paramType: 'SYSTEM' | 'BUSINESS'
+  paramGroup?: string
+  paramName: string
+  paramKey: string
+  paramValue?: string
+  valueType: 'STRING' | 'TEXT' | 'PASSWORD' | 'NUMBER' | 'BOOLEAN'
+  remark?: string
+  status: number
+  createTime?: string
+  updateTime?: string
+}

@@ -12,6 +12,7 @@ DROP TABLE IF EXISTS `user_addresses`;
 DROP TABLE IF EXISTS `backend_users`;
 DROP TABLE IF EXISTS `frontend_users`;
 DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `sys_param_config`;
 
 CREATE TABLE `frontend_users` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
@@ -40,6 +41,24 @@ CREATE TABLE `backend_users` (
   `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_backend_username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `sys_param_config` (
+  `id` BIGINT NOT NULL AUTO_INCREMENT,
+  `param_type` VARCHAR(32) NOT NULL COMMENT 'SYSTEM:系统参数 BUSINESS:业务参数',
+  `param_group` VARCHAR(64) DEFAULT NULL COMMENT '参数分组',
+  `param_name` VARCHAR(128) NOT NULL COMMENT '参数名称',
+  `param_key` VARCHAR(128) NOT NULL COMMENT '参数键',
+  `param_value` TEXT COMMENT '参数值',
+  `value_type` VARCHAR(32) NOT NULL DEFAULT 'STRING' COMMENT 'STRING/TEXT/PASSWORD/NUMBER/BOOLEAN',
+  `remark` VARCHAR(255) DEFAULT NULL COMMENT '备注',
+  `status` TINYINT NOT NULL DEFAULT 1 COMMENT '1启用 0禁用',
+  `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_sys_param_key` (`param_key`),
+  KEY `idx_sys_param_type` (`param_type`),
+  KEY `idx_sys_param_group` (`param_group`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE `user_addresses` (

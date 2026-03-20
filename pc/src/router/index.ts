@@ -15,6 +15,7 @@ const routes: RouteRecordRaw[] = [
     children: [
       { path: '', redirect: '/dashboard' },
       { path: 'dashboard', name: 'dashboard', component: () => import('@/pages/AdminStatsPage.vue'), meta: { admin: true } },
+      { path: 'system-params', name: 'system-params', component: () => import('@/pages/SystemParamsPage.vue'), meta: { admin: true } },
       { path: 'products', name: 'products', component: () => import('@/pages/ProductsPage.vue') },
       { path: 'orders', name: 'orders', component: () => import('@/pages/OrdersPage.vue') },
       { path: 'users/backend', name: 'backend-users', component: () => import('@/pages/AdminUsersPage.vue'), meta: { admin: true, userType: 'BACKEND' } },

@@ -7,6 +7,16 @@ INSERT INTO `backend_users` (`username`, `password`, `nickname`, `phone`, `email
 INSERT INTO `frontend_users` (`username`, `password`, `nickname`, `phone`, `email`, `status`) VALUES
 ('buyer01', '123456', '张三', '13900000001', 'buyer01@aiboot.com', 1);
 
+INSERT INTO `sys_param_config` (`param_type`, `param_group`, `param_name`, `param_key`, `param_value`, `value_type`, `remark`, `status`) VALUES
+('SYSTEM', 'oss', 'OSS Endpoint', 'oss.endpoint', 'http://oss-cn-beijing.aliyuncs.com', 'STRING', '阿里云 OSS 访问节点', 1),
+('SYSTEM', 'oss', 'OSS AccessKeyId', 'oss.accessKeyId', '', 'PASSWORD', '请在后台参数配置页面维护真实值', 1),
+('SYSTEM', 'oss', 'OSS AccessKeySecret', 'oss.accessKeySecret', '', 'PASSWORD', '请在后台参数配置页面维护真实值', 1),
+('SYSTEM', 'oss', 'OSS Bucket', 'oss.bucketName', 'pst-test', 'STRING', 'OSS Bucket 名称', 1),
+('SYSTEM', 'oss', 'OSS Domain', 'oss.domain', 'https://pst-test.oss-cn-beijing.aliyuncs.com', 'STRING', '文件访问域名', 1),
+('SYSTEM', 'oss', 'OSS BasePath', 'oss.basePath', 'wftest/ai-boot/uploads', 'STRING', '上传根目录', 1),
+('BUSINESS', 'shop', '商城名称', 'shop.name', 'AI Boot Mall', 'STRING', '前后台可复用的商城展示名称', 1),
+('BUSINESS', 'order', '自动取消订单分钟数', 'order.autoCancelMinutes', '30', 'NUMBER', '超时未支付自动取消订单', 1);
+
 INSERT INTO `user_addresses` (`user_id`, `receiver_name`, `receiver_phone`, `province`, `city`, `district`, `detail_address`, `postal_code`, `is_default`, `status`) VALUES
 (1, '张三', '13900000001', '上海市', '上海市', '浦东新区', 'XX路88号1201室', '200120', 1, 1),
 (1, '张三', '13900000001', '江苏省', '苏州市', '工业园区', '星湖街100号', '215000', 0, 1);

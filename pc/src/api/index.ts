@@ -10,6 +10,7 @@ import type {
   Payment,
   Product,
   ProductSaveRequest,
+  SystemParamConfig,
   UploadResult,
   UserProfile,
 } from '@/types'
@@ -73,6 +74,18 @@ export const api = {
   },
   deleteProduct(id: number) {
     return request<void>({ url: `/api/products/${id}`, method: 'delete' })
+  },
+  listSystemParams(params?: { paramType?: 'SYSTEM' | 'BUSINESS'; keyword?: string }) {
+    return request<SystemParamConfig[]>({ url: '/api/admin/system-params', method: 'get', params })
+  },
+  createSystemParam(data: Omit<SystemParamConfig, 'id' | 'createTime' | 'updateTime'>) {
+    return request<SystemParamConfig>({ url: '/api/admin/system-params', method: 'post', data })
+  },
+  updateSystemParam(id: number, data: Omit<SystemParamConfig, 'id' | 'createTime' | 'updateTime'>) {
+    return request<SystemParamConfig>({ url: `/api/admin/system-params/${id}`, method: 'put', data })
+  },
+  deleteSystemParam(id: number) {
+    return request<void>({ url: `/api/admin/system-params/${id}`, method: 'delete' })
   },
   addCart(data: { userId: number; productId: number; quantity: number }) {
     return request<void>({ url: '/api/cart', method: 'post', data })
