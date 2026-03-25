@@ -19,6 +19,7 @@ export interface UserProfile {
   nickname: string
   phone?: string
   email?: string
+  avatar?: string
   userType: 'BACKEND' | 'FRONTEND'
   roleCode?: string | null
   status: number

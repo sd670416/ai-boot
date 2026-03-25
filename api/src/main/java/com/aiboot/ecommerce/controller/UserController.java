@@ -76,6 +76,7 @@ public class UserController {
             user.setNickname(request.getNickname());
             user.setPhone(request.getPhone());
             user.setEmail(request.getEmail());
+            user.setAvatar(request.getAvatar());
             user.setRoleCode(normalizeBackendRole(request.getRoleCode()));
             user.setStatus(normalizeStatus(request.getStatus()));
             backendUserService.save(user);
@@ -113,6 +114,7 @@ public class UserController {
             existing.setNickname(request.getNickname());
             existing.setPhone(request.getPhone());
             existing.setEmail(request.getEmail());
+            existing.setAvatar(request.getAvatar());
             existing.setRoleCode(normalizeBackendRole(request.getRoleCode()));
             existing.setStatus(normalizeStatus(request.getStatus()));
             backendUserService.updateById(existing);
@@ -197,6 +199,7 @@ public class UserController {
         response.setNickname(user.getNickname());
         response.setPhone(user.getPhone());
         response.setEmail(user.getEmail());
+        response.setAvatar(null);
         response.setUserType("FRONTEND");
         response.setRoleCode(null);
         response.setStatus(user.getStatus());
@@ -210,6 +213,7 @@ public class UserController {
         response.setNickname(user.getNickname());
         response.setPhone(user.getPhone());
         response.setEmail(user.getEmail());
+        response.setAvatar(user.getAvatar());
         response.setUserType("BACKEND");
         response.setRoleCode(user.getRoleCode());
         response.setStatus(user.getStatus());

@@ -14,6 +14,7 @@ public class BackendUser extends BaseEntity {
     private String nickname;
     private String phone;
     private String email;
+    private String avatar;
     private String roleCode;
     private Integer status;
 }

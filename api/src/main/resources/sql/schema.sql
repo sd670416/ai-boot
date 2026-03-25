@@ -35,6 +35,7 @@ CREATE TABLE `backend_users` (
   `nickname` VARCHAR(64) DEFAULT NULL,
   `phone` VARCHAR(32) DEFAULT NULL,
   `email` VARCHAR(128) DEFAULT NULL,
+  `avatar` VARCHAR(255) DEFAULT NULL,
   `role_code` VARCHAR(32) NOT NULL DEFAULT 'OPERATOR',
   `status` TINYINT NOT NULL DEFAULT 1,
   `create_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -199,3 +200,4 @@ CREATE TABLE `payments` (
   CONSTRAINT `fk_payments_order_id` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
   CONSTRAINT `fk_payments_user_id` FOREIGN KEY (`user_id`) REFERENCES `frontend_users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+

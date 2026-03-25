@@ -42,6 +42,7 @@ public class AuthController {
         response.setNickname(user.getNickname());
         response.setPhone(user.getPhone());
         response.setEmail(user.getEmail());
+        response.setAvatar(null);
         response.setUserType("FRONTEND");
         response.setRoleCode(null);
         response.setStatus(user.getStatus());
@@ -55,6 +56,7 @@ public class AuthController {
         response.setNickname(user.getNickname());
         response.setPhone(user.getPhone());
         response.setEmail(user.getEmail());
+        response.setAvatar(user.getAvatar());
         response.setUserType("BACKEND");
         response.setRoleCode(user.getRoleCode());
         response.setStatus(user.getStatus());

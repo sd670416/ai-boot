@@ -10,6 +10,7 @@ public class UserProfileResponse {
     private String nickname;
     private String phone;
     private String email;
+    private String avatar;
     private String userType;
     private String roleCode;
     private Integer status;

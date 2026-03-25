@@ -20,6 +20,8 @@ public class AdminUserSaveRequest {
 
     private String email;
 
+    private String avatar;
+
     @NotBlank(message = "用户类型不能为空")
     private String userType;
 

@@ -52,6 +52,9 @@
         <n-form-item label="用户类型">
           <n-select v-model:value="userForm.userType" :options="userTypeOptions" @update:value="handleUserTypeChange" />
         </n-form-item>
+        <n-form-item v-if="userForm.userType === 'BACKEND'" label="头像">
+          <ImageUploadField v-model="avatarValue" :max="1" upload-text="上传头像" compact />
+        </n-form-item>
         <n-form-item v-if="userForm.userType === 'BACKEND'" label="角色编码">
           <n-select v-model:value="userForm.roleCode" :options="roleOptions" />
         </n-form-item>
@@ -70,9 +73,10 @@
 <script setup lang="ts">
 import { computed, h, onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { NButton, NCard, NDataTable, NDrawer, NDrawerContent, NForm, NFormItem, NInput, NModal, NPopconfirm, NSelect, NSpace, NTag, useMessage, type DataTableColumns } from 'naive-ui'
+import { NAvatar, NButton, NCard, NDataTable, NDrawer, NDrawerContent, NForm, NFormItem, NInput, NModal, NPopconfirm, NSelect, NSpace, NTag, useMessage, type DataTableColumns } from 'naive-ui'
 import { api } from '@/api'
 import AddressFormModal from '@/components/AddressFormModal.vue'
+import ImageUploadField from '@/components/ImageUploadField.vue'
 import { useAuthStore } from '@/stores/auth'
 import type { Address, UserProfile } from '@/types'
 
@@ -82,6 +86,7 @@ interface UserFormModel {
   password: string
   phone: string
   email: string
+  avatar: string
   userType: UserProfile['userType']
   roleCode?: string
   status: number
@@ -103,7 +108,7 @@ const editingUser = ref<UserProfile | null>(null)
 const currentUserType = computed<UserProfile['userType']>(() => route.meta.userType === 'BACKEND' ? 'BACKEND' : 'FRONTEND')
 const pageTitle = computed(() => currentUserType.value === 'BACKEND' ? '后台用户管理' : '前台用户管理')
 const pageDescription = computed(() => currentUserType.value === 'BACKEND'
-  ? '维护后台账号、角色与状态，只有后台用户参与角色权限控制。'
+  ? '维护后台账号、角色、头像与状态，只有后台用户参与角色权限控制。'
   : '维护前台会员账号，并可查看订单与收货地址。')
 
 const userForm = reactive<UserFormModel>({
@@ -112,9 +117,17 @@ const userForm = reactive<UserFormModel>({
   password: '',
   phone: '',
   email: '',
+  avatar: '',
   userType: 'FRONTEND',
   roleCode: undefined,
   status: 1,
+})
+
+const avatarValue = computed({
+  get: () => userForm.avatar || '',
+  set: (value: string | string[]) => {
+    userForm.avatar = Array.isArray(value) ? value[0] || '' : value
+  },
 })
 
 const userTypeOptions = [
@@ -133,6 +146,14 @@ const statusOptions = [
 
 const columns: DataTableColumns<UserProfile> = [
   { title: 'ID', key: 'id' },
+  {
+    title: '头像',
+    key: 'avatar',
+    width: 88,
+    render: (row) => row.userType === 'BACKEND'
+      ? h(NAvatar, { round: true, size: 44, src: row.avatar || undefined }, { default: () => row.nickname?.slice(0, 1) || row.username.slice(0, 1) })
+      : '-',
+  },
   { title: '用户名', key: 'username' },
   { title: '昵称', key: 'nickname' },
   { title: '手机号', key: 'phone' },
@@ -213,6 +234,9 @@ async function loadUsers() {
 function handleUserTypeChange(value: UserProfile['userType']) {
   userForm.userType = value
   userForm.roleCode = value === 'BACKEND' ? 'OPERATOR' : undefined
+  if (value !== 'BACKEND') {
+    userForm.avatar = ''
+  }
 }
 
 function openUserModal(user?: UserProfile) {
@@ -223,6 +247,7 @@ function openUserModal(user?: UserProfile) {
     password: '',
     phone: user.phone || '',
     email: user.email || '',
+    avatar: user.avatar || '',
     userType: user.userType,
     roleCode: user.userType === 'BACKEND' ? (user.roleCode || 'OPERATOR') : undefined,
     status: user.status,
@@ -232,6 +257,7 @@ function openUserModal(user?: UserProfile) {
     password: '',
     phone: '',
     email: '',
+    avatar: '',
     userType: currentUserType.value,
     roleCode: currentUserType.value === 'BACKEND' ? 'OPERATOR' : undefined,
     status: 1,
@@ -246,6 +272,7 @@ async function saveUser() {
     password: userForm.password,
     phone: userForm.phone,
     email: userForm.email,
+    avatar: userForm.userType === 'BACKEND' ? userForm.avatar : undefined,
     userType: userForm.userType,
     roleCode: userForm.userType === 'BACKEND' ? userForm.roleCode : undefined,
     status: userForm.status,

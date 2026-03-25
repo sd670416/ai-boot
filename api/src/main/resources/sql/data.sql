@@ -1,8 +1,8 @@
 USE `ai-boot`;
 
-INSERT INTO `backend_users` (`username`, `password`, `nickname`, `phone`, `email`, `role_code`, `status`) VALUES
-('admin', '123456', '系统管理员', '13800000000', 'admin@aiboot.com', 'SUPER_ADMIN', 1),
-('operator01', '123456', '运营小王', '13800000002', 'operator01@aiboot.com', 'OPERATOR', 1);
+INSERT INTO `backend_users` (`username`, `password`, `nickname`, `phone`, `email`, `avatar`, `role_code`, `status`) VALUES
+('admin', '123456', '系统管理员', '13800000000', 'admin@aiboot.com', '', 'SUPER_ADMIN', 1),
+('operator01', '123456', '运营小王', '13800000002', 'operator01@aiboot.com', '', 'OPERATOR', 1);
 
 INSERT INTO `frontend_users` (`username`, `password`, `nickname`, `phone`, `email`, `status`) VALUES
 ('buyer01', '123456', '张三', '13900000001', 'buyer01@aiboot.com', 1);
@@ -38,3 +38,4 @@ INSERT INTO `product_skus` (`product_id`, `sku_code`, `sku_name`, `spec_values`,
 (2, 'AIR-13-GRAY-32-1T', '轻薄笔记本 Air 深空灰 32G+1T', '颜色:深空灰;配置:32G+1T', 'https://test-ai-boot-bucket.oss-cn-hangzhou.aliyuncs.com/demo/laptop-air-gray.jpg', 6999.00, 20, 1),
 (3, 'FRYER-6L-WHITE', '智能空气炸锅 白色 6L', '颜色:白色;容量:6L', 'https://test-ai-boot-bucket.oss-cn-hangzhou.aliyuncs.com/demo/fryer-white.jpg', 399.00, 50, 1),
 (3, 'FRYER-8L-BLACK', '智能空气炸锅 黑色 8L', '颜色:黑色;容量:8L', 'https://test-ai-boot-bucket.oss-cn-hangzhou.aliyuncs.com/demo/fryer-black.jpg', 499.00, 30, 1);
+
